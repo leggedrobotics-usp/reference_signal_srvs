@@ -1,0 +1,10 @@
+float64 offset            0.0
+float64 amplitude         1.0
+float64 initial_frequency 1.0
+float64 target_frequency  1.0
+float64 target_time       1.0
+float64 publish_rate      1.0
+float64 total_time
+---
+bool    success
+string  message
