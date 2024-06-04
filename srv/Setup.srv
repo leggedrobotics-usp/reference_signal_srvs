@@ -1,0 +1,18 @@
+string[]  signal_type
+float64[] initial_value
+float64[] final_value
+float64[] start_time
+float64[] end_time
+float64[] slope
+float64[] offset
+float64[] amplitude
+float64[] frequency
+float64[] phase
+float64[] initial_frequency
+float64[] target_frequency
+float64[] target_time
+float64[] publish_rate
+float64[] total_time
+---
+bool success
+string message
