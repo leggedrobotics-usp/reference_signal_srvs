@@ -11,10 +11,6 @@ find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
   "srv/Setup.srv"
-  "srv/Step.srv"
-  "srv/Ramp.srv"
-  "srv/Wave.srv"
-  "srv/Chirp.srv"
 )
 
 if(BUILD_TESTING)
