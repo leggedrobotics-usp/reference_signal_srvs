@@ -11,8 +11,8 @@ float64[] phase
 float64[] initial_frequency
 float64[] target_frequency
 float64[] target_time
-float64[] publish_rate
-float64[] total_time
+float64 publish_rate
+float64 total_time
 ---
 bool success
 string message
