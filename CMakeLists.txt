@@ -10,10 +10,7 @@ find_package(ament_cmake REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
-  "srv/Step.srv"
-  "srv/Ramp.srv"
-  "srv/Wave.srv"
-  "srv/Chirp.srv"
+  "srv/Setup.srv"
 )
 
 if(BUILD_TESTING)

@@ -62,40 +62,36 @@ Service message definitions (.srv files) are not directly usable by themselves. 
 
 You can also use the definitions of this repository to build other packages related to control signal generation.
 
-### Common arguments for all interfaces
+The goal of this service is to trigger a reference signal with an arbitrary number of inputs (or DOFs). Thus, most arguments are array-type. They must all have the same length.
 
-- Request arguments
-    - ``publish_rate`` Rate (Hz) to publish the reference signal (defaults to 1.0).
-    - ``total_time`` Total time (seconds) to publish the reference signal. Publisher will automatically stop after this period. Set to ``inf`` to publish indefinitely.
+### Request arguments
 
-- Response arguments
-    - ``success`` Boolean output to indicate whether or not the reference signal was successfully published.
-    - ``message`` String to give more detailed information about the service call.
+- ``string[] signal_type`` String array describing the desired signal type for each input. Supported values are ``"step", "ramp", "sine", "square", "triangle", "sawtooth", "chirp"``.
+- ``float64[] initial_value`` Numeric array describing the initial value for each input. Applies to Step and Ramp signals.
+- ``float64[] final_value`` Numeric array describing the final value for each input. Applies to Step signals.
+- ``float64[] start_time`` Numeric array describing the time (seconds) at which each input will be started. Applies to all signals.
+- ``float64[] end_time`` Numeric array describing the time (seconds) at which each input will stop. Applies to all signals. Supports ``inf`` for continuous publishing.
+- ``float64[] slope`` Numeric array describing the slope for each input. Applies to Ramp signals.
+- ``float64[] offset`` Numeric array describing the DC offset for each input. Applies to Sine, Square, Triangle, Sawtooth and Chirp signals.
+- ``float64[] amplitude`` Numeric array describing the total amplitude for each input. Applies to Sine, Square, Triangle, Sawtooth and Chirp signals.
+- ``float64[] frequency`` Numeric array describing the waveform frequency (Hz) for each input. Applies to Sine, Square, Triangle and Sawtooth signals.
+- ``float64[] phase`` Numeric array describing the phase shift (degrees) for each input. Applies to Sine, Square, Triangle, Sawtooth and Chirp signals.
+- ``float64[] initial_frequency`` Numeric array describing the frequency (Hz) at ``t = start_time`` for each input. Applies to Chirp signals.
+- ``float64[] target_frequency`` Numeric array describing the frequency (Hz) at ``t = target_time`` for each input. Applies to Chirp signals.
+- ``float64[] target_time`` Numeric array describing the time (seconds) at which the chirp frequency will linearly reach ``target_frequency`` for each input. Applies to Chirp Signals.
+- ``float64 publish_rate`` Number describing the rate (Hz) at which the topic will publish the reference signal.
+- ``float64 total_time`` Number describing the total duration (seconds) of all reference signals. Supports ``inf`` for continuous publishing.
 
-### Request arguments specific to each interface
+Please note that, although some inputs are specific for a certain type of signal, all arrays must be supplied with the same length during the service call, filling the unused fields with any arbitrary value.
 
-- **Step**
-    - ``initial_value`` Starting value of the step signal (defaults to 0.0).
-    - ``final_value`` Final value of the step signal (defaults to 1.0).
-    - ``step_time`` Time (seconds) to trigger the step signal (defaults to 0.0).
-- **Ramp**
-    - ``initial_value`` Starting value of the ramp signal (defaults to 0.0).
-    - ``slope`` Growth rate of the ramp signal (defaults to 1.0).
-    - ``start_time`` Time (seconds) to trigger the ramp signal (defaults to 0.0).
-- **Wave** (applies to square, sine, sawtooth and triangle waves)
-    - ``offset`` DC offset applied to the waveform (defaults to 0.0).
-    - ``amplitude`` Total amplitude of the waveform (defaults to 1.0).
-    - ``frequency`` Frequency (Hz) of the waveform (defaults to 1.0).
-- **Chirp** (linear frequency-swept cosine)
-    - ``offset`` DC offset applied to the waveform (defaults to 0.0).
-    - ``amplitude`` Total amplitude of the waveform (defaults to 1.0).
-    - ``initial_frequency`` Frequency (Hz) at time zero (defaults to 1.0).
-    - ``target_frequency`` Frequency (Hz) at ``target_time`` (defaults to 1.0)
-    - ``target_time`` Time (seconds) corresponding to ``target_frequency`` (defaults to 1.0)
+### Response arguments
+
+- ``success`` Boolean output to indicate whether or not the reference signal was successfully published.
+- ``message`` String to give more detailed information about the service call.
 
 ## 🔋 Feature requests <a name="feature_requests"></a>
 
-Want another type of reference signal that demands a different type of service definition? Open an *Enhancement* issue describing it.
+Want another type of reference signal that demands an additional argument or a different type of service definition? Open an *Enhancement* issue describing it.
 
 ## 🤝 Contributing <a name="contributing"></a>
 
