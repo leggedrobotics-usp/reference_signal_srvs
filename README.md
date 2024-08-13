@@ -21,6 +21,11 @@
     <br>
 </p>
 
+ROS version | Branch
+-- | --
+ROS2 | [ros2](https://github.com/leggedrobotics-usp/reference_signal_srvs/tree/ros2)
+ROS1 | [ros1](https://github.com/leggedrobotics-usp/reference_signal_srvs/tree/ros1)
+
 ## 📝 Table of Contents
 - [About](#about)
 - [Getting Started](#getting_started)
@@ -42,11 +47,11 @@ This repo is a ROS2 package (ament_cmake) dedicated to service interface definit
 
 ### 💻 Installing
 
-As mentioned above, this repo is a standard ROS2 package. Thus, you simply have to clone it inside your workspace's **src** directory.
+As mentioned above, this repo is a standard ROS2 package. Thus, you simply have to clone it inside your workspace's **src** directory, making sure to use the **ros2** branch.
 
 ```bash
 cd <path_to_your_ros2_ws>/src
-git clone https://github.com/leggedrobotics-usp/reference_signal_srvs.git
+git clone -b ros2 https://github.com/leggedrobotics-usp/reference_signal_srvs.git
 ```
 
 Then, use **colcon** to build.
